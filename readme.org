@@ -1,0 +1,11 @@
+* An Introduction to Nix(OS) at Cloud Native Groningen Meetup (2026)
+
+Here are the slides for the talk I gave about "Introduction to Nix(OS)" on the
+Cloud Native Groningen Meetup of 2026-05-21.
+
+The [[https://c0deaddict.github.io/nixos-cloud-native-groningen-2026][slides]] are generated from [[./index.org][this]] Org file with [[https://github.com/yjwen/org-reveal/][org-reveal]].  If you
+want to do this yourself you need Emacs and install the org-reveal
+package. Then open the =index.org= file and press =C-c C-e R R= this
+will generate the =index.html= file.
+
+In reveal.js press =s= to open the speaker notes.

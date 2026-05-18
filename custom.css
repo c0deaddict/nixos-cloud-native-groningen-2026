@@ -1,0 +1,40 @@
+.reveal {
+    font-size: 38px;
+}
+
+.figure p {
+    font-size: 24px;
+}
+
+.horizontal-figures {
+    display: flex;
+    margin-left: 75px !important;
+}
+
+.horizontal-figures .figure {
+    padding-right: 20px;
+}
+
+.org-src-container {
+    text-align: left;
+}
+
+.org-src-container label {
+    font-size: 28px;
+}
+
+.reveal pre {
+    box-shadow: none;
+}
+
+pre.src[data-wrap="wrap"] > code {
+    white-space: pre-wrap;
+}
+
+.vertical-split {
+  display: flex;
+}
+
+.vertical-split>div {
+  flex: 1;
+}
