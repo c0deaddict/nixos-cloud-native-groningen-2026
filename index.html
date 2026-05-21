@@ -33,8 +33,8 @@
 <h2 class="author">Jos van Bakel</h2>
 </section>
 <section>
-<section id="slide-org4670792">
-<h2 id="org4670792">About me</h2>
+<section id="slide-org3da75cf">
+<h2 id="org3da75cf">About me</h2>
 <ul>
 <li>Jos van Bakel</li>
 <li>Platform engineer at Voys</li>
@@ -45,8 +45,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orgb0a03e8">
-<h2 id="orgb0a03e8">Agenda</h2>
+<section id="slide-org77e9ddd">
+<h2 id="org77e9ddd">Agenda</h2>
 <ul>
 <li class="fragment appear">Why</li>
 <li class="fragment appear">What is Nix?</li>
@@ -71,8 +71,8 @@ Before we begin:
 </section>
 </section>
 <section>
-<section id="slide-org23e3d9e">
-<h2 id="org23e3d9e">Why</h2>
+<section id="slide-org588d0e1">
+<h2 id="org588d0e1">Why</h2>
 <ul>
 <li class="fragment appear">I've been tinkering with Linux systems for ~25 years.</li>
 <li class="fragment appear">Tried many distributions: RedHat, Gentoo, Ubuntu, Mint, Arch.</li>
@@ -90,8 +90,8 @@ Upgrading these systems was always a pain.
 
 </aside>
 </section>
-<section id="slide-org977f8d7">
-<h3 id="org977f8d7">Problems</h3>
+<section id="slide-org612ea67">
+<h3 id="org612ea67">Problems</h3>
 <ul>
 <li class="fragment appear">Forget how systems are configured</li>
 <li class="fragment appear">Hard to customize core system processes</li>
@@ -102,10 +102,10 @@ Upgrading these systems was always a pain.
 
 </ul>
 </section>
-<section id="slide-org04ca5ea">
-<h3 id="org04ca5ea">My solution: NixOS!</h3>
+<section id="slide-org7038670">
+<h3 id="org7038670">My solution: NixOS!</h3>
 
-<div id="org5b873c4" class="figure">
+<div id="orga0806f4" class="figure">
 <p><img src="./images/all-things-declarative.png" alt="all-things-declarative.png" />
 </p>
 </div>
@@ -132,10 +132,10 @@ NixOS has allowed me to confidently run it on (almost) all of my home systems, a
 </section>
 </section>
 <section>
-<section id="slide-orgd042a8f">
-<h2 id="orgd042a8f">What is Nix?</h2>
+<section id="slide-org5f36783">
+<h2 id="org5f36783">What is Nix?</h2>
 
-<div id="orgebbc3ef" class="figure">
+<div id="orgd66badb" class="figure">
 <p><img src="./images/the-declarative-trinity.webp" alt="the-declarative-trinity.webp" />
 </p>
 </div>
@@ -153,8 +153,8 @@ NixOS has allowed me to confidently run it on (almost) all of my home systems, a
 
 </aside>
 </section>
-<section id="slide-org2bd76ff">
-<h3 id="org2bd76ff">Language</h3>
+<section id="slide-org5cbe942">
+<h3 id="org5cbe942">Language</h3>
 <ul>
 <li>Purely functional (no side-effects)</li>
 <li>Lazily evaluated</li>
@@ -190,8 +190,8 @@ NixOS has allowed me to confidently run it on (almost) all of my home systems, a
 
 </aside>
 </section>
-<section id="slide-orgc067779">
-<h3 id="orgc067779">Derivation</h3>
+<section id="slide-org8a4af0b">
+<h3 id="org8a4af0b">Derivation</h3>
 <blockquote >
 <p>
 A structure that defines an executable or script that takes some inputs and produces an output.
@@ -202,14 +202,16 @@ A structure that defines an executable or script that takes some inputs and prod
 <ul>
 <li>like a Makefile, a "build recipe"</li>
 <li>inputs can be other derivations (dependencies)</li>
-<li>to simplify: we can just call this a "package", actually there is a intermediate step called a "derivation file", but we'll ignore that for today.</li>
+<li>to simplify: we can just call this a "package",
+actually there is a intermediate step called a "derivation file",
+<b>but we'll ignore that for today.</b></li>
 
 </ul>
 
 </aside>
 </section>
-<section id="slide-org7403d74">
-<h3 id="org7403d74">Example</h3>
+<section id="slide-org106aac9">
+<h3 id="org106aac9">Example</h3>
 <div class="org-src-container">
 
 <pre  class="src src-nix-ts"   ><code trim>stdenv.<span style="color: #81a2be;">mkDerivation</span> <span style="color: #b294bb;">{</span>
@@ -226,14 +228,14 @@ A structure that defines an executable or script that takes some inputs and prod
 
 <div class="org-src-container">
 
-<pre  class="src src-bash"   ><code trim>$ nix-build hello.nix
+<pre  class="fragment (appear)"   ><code trim>$ nix-build hello.nix
 /nix/store/74vhgn2qs91n9q4yws0qp4jbxq1aplpp-hello-world
 </code></pre>
 </div>
 
 <div class="org-src-container">
 
-<pre  class="src src-bash"   ><code trim>$ cat result
+<pre  class="fragment (appear)"   ><code trim>$ cat result
 <span style="color: #969896;">#</span><span style="color: #969896;">!/nix/store/4bwbk...m2i-bash-interactive-5.3p9/bin/bash
 </span><span style="color: #8abeb7;">echo</span> <span style="color: #b5bd68;">"Hello world!</span>
 </code></pre>
@@ -254,8 +256,8 @@ A structure that defines an executable or script that takes some inputs and prod
 
 </aside>
 </section>
-<section id="slide-orgc152017">
-<h3 id="orgc152017">Build sandbox</h3>
+<section id="slide-org30e4174">
+<h3 id="org30e4174">Build sandbox</h3>
 <ul>
 <li>Isolated filesystem, only inputs (dependencies) are available</li>
 <li>Private PID/mount/network/IPC/UTS namespaces</li>
@@ -294,8 +296,8 @@ Show:
 
 </aside>
 </section>
-<section id="slide-orgdc2980d">
-<h3 id="orgdc2980d">What are those hashes?</h3>
+<section id="slide-org018509e">
+<h3 id="org018509e">What are those hashes?</h3>
 <p>
 <b>Input addressed</b>
 </p>
@@ -309,8 +311,17 @@ The output name is a hash of the name, version, builder and <b>names of all inpu
 </p>
 
 <p>
-Downloadable files for which we can know the hash before the build (eg. <code>fetchFromGitHub</code> or local <code>./src</code>)
+Downloadable files for which we can know the hash before the build (eg. <code>fetchurl</code> or local <code>./src</code>)
 </p>
+
+<div class="org-src-container">
+
+<pre  class="fragment (appear)"   ><code trim><span style="color: #8abeb7;">fetchurl</span> <span style="color: #b294bb;">{</span>
+  url = <span style="color: #b5bd68;">"https://raw.githubusercontent.com/NixOS/nixpkgs/23.05/.version"</span>;
+  hash = <span style="color: #b5bd68;">"sha256-ZHl1emidXVojm83LCVrwULpwIzKE/mYwfztVkvpruOM="</span>;
+<span style="color: #b294bb;">}</span>
+</code></pre>
+</div>
 
 <aside class="notes">
 <ul>
@@ -322,16 +333,16 @@ Downloadable files for which we can know the hash before the build (eg. <code>fe
 
 </aside>
 </section>
-<section id="slide-org1ddb0bf">
-<h3 id="org1ddb0bf">Nix store</h3>
+<section id="slide-org3a69243">
+<h3 id="org3a69243">Nix store</h3>
 <ul>
-<li>All packages are saved in the global <code>/nix/store</code></li>
+<li>All packages are installed in the global <code>/nix/store</code></li>
 <li>The store is immutable, packages are never overwritten.</li>
 
 </ul>
 
 
-<div id="org68275b7" class="figure">
+<div id="orgd15bbd2" class="figure">
 <p><img src="./images/nix-store.webp" alt="nix-store.webp" class="fragment (appear)" width="80%" />
 </p>
 </div>
@@ -347,8 +358,8 @@ source of image: <a href="https://www.reddit.com/r/NixOS/comments/x1sfff/nixstor
 
 </aside>
 </section>
-<section id="slide-orgf1087de">
-<h3 id="orgf1087de">Generic Builders</h3>
+<section id="slide-org41d27e3">
+<h3 id="org41d27e3">Generic Builders</h3>
 <ul>
 <li><code>builtins.derivation</code></li>
 <li><code>stdenv.mkDerivation</code></li>
@@ -375,8 +386,8 @@ A lot of different package builders and ecosystems are supported.
 
 </aside>
 </section>
-<section id="slide-orgc0c3a9d">
-<h3 id="orgc0c3a9d">Example</h3>
+<section id="slide-org66a3e99">
+<h3 id="org66a3e99">Example</h3>
 <div class="org-src-container">
 
 <pre  class="src src-nix-ts"   ><code trim><span style="color: #b294bb;">{</span> lib, fetchFromGitHub, buildGoModule <span style="color: #b294bb;">}</span>:
@@ -397,15 +408,15 @@ A lot of different package builders and ecosystems are supported.
 </code></pre>
 </div>
 </section>
-<section id="slide-orgda3430b">
-<h3 id="orgda3430b">Nixpkgs</h3>
+<section id="slide-orga7ad3b1">
+<h3 id="orga7ad3b1">Nixpkgs</h3>
 <ul>
-<li>Git repository: <a href="https://github.com/NixOS/nixpkgs">https://github.com/NixOS/nixpkgs</a></li>
-<li>Contains definitions of packages and modules</li>
-<li>Also contains tests, library functions, etc.</li>
-<li>Contains more than <b>114K</b> packages (according to Repology)</li>
-<li>Hydra CI system builds and uploads binaries to <b>binary cache</b></li>
-<li>Low barrier to contribute packages, it's just git</li>
+<li class="fragment appear">Git repository: <a href="https://github.com/NixOS/nixpkgs">https://github.com/NixOS/nixpkgs</a></li>
+<li class="fragment appear">Contains definitions of packages and modules</li>
+<li class="fragment appear">Also contains tests, library functions, etc.</li>
+<li class="fragment appear">Contains more than <b>114K</b> packages (according to Repology)</li>
+<li class="fragment appear">Hydra CI system builds and uploads binaries to <b>binary cache</b></li>
+<li class="fragment appear">Low barrier to contribute packages, it's just git</li>
 
 </ul>
 
@@ -426,8 +437,8 @@ In general: this is the main source of truth. To make your system reproducible y
 
 </aside>
 </section>
-<section id="slide-org9085605">
-<h4 id="org9085605">Nixpkgs: going back in time</h4>
+<section id="slide-org099e2c4">
+<h4 id="org099e2c4">Nixpkgs: going back in time</h4>
 <div class="org-src-container">
 
 <pre  class="src src-bash"   ><code trim>git version
@@ -444,14 +455,14 @@ In general: this is the main source of truth. To make your system reproducible y
 </code></pre>
 </div>
 </section>
-<section id="slide-org4f88f25">
-<h3 id="org4f88f25">Environments</h3>
+<section id="slide-org776b8b3">
+<h3 id="org776b8b3">Environments</h3>
 <p>
 <code>/nix/store</code> paths are hashed, so how do we find executables?
 </p>
 </section>
-<section id="slide-orgce52267">
-<h4 id="orgce52267">Ad hoc</h4>
+<section id="slide-orgc9ad2a9">
+<h4 id="orgc9ad2a9">Ad hoc</h4>
 <div class="org-src-container">
 
 <pre  class="fragment (appear)"   ><code trim>cowsay hello world | lolcat
@@ -481,8 +492,8 @@ cowsay hello world | lolcat
 
 </aside>
 </section>
-<section id="slide-orgfcfeefa">
-<h4 id="orgfcfeefa">Development environment</h4>
+<section id="slide-orgc4b8735">
+<h4 id="orgc4b8735">Development environment</h4>
 <div class="org-src-container">
 
 <pre  class="src src-nix-ts"   ><code trim>pkgs.<span style="color: #81a2be;">mkShellNoCC</span> <span style="color: #b294bb;">{</span>
@@ -514,8 +525,8 @@ and any point in time.</li>
 
 </aside>
 </section>
-<section id="slide-org8819d56">
-<h4 id="org8819d56">Symlinks</h4>
+<section id="slide-org698e876">
+<h4 id="org698e876">Symlinks</h4>
 <div class="org-src-container">
 
 <pre  class="src src-nix-ts"   ><code trim>pkgs.<span style="color: #81a2be;">symlinkJoin</span> <span style="color: #b294bb;">{</span>
@@ -531,13 +542,14 @@ and any point in time.</li>
 <aside class="notes">
 <ul>
 <li>Show <code>nix-build ./profile.nix</code> and then <code>ls result/bin</code></li>
+<li>Could include this into <code>$PATH</code> (but don't do this manually, NixOS profiles are for that).</li>
 
 </ul>
 
 </aside>
 </section>
-<section id="slide-orgeecd2e8">
-<h3 id="orgeecd2e8">What is Nix?</h3>
+<section id="slide-orgd6bf87b">
+<h3 id="orgd6bf87b">What is Nix?</h3>
 <p>
 <b><b>Summary</b></b>
 </p>
@@ -567,10 +579,10 @@ I haven't shown how to customize packages, but there are multiple ways to do tha
 </section>
 </section>
 <section>
-<section id="slide-orgad756bf">
-<h2 id="orgad756bf">What is NixOS?</h2>
+<section id="slide-orgc92063c">
+<h2 id="orgc92063c">What is NixOS?</h2>
 
-<div id="org0746e59" class="figure">
+<div id="orgbea849b" class="figure">
 <p><img src="./images/nixos-logo.svg" alt="nixos-logo.svg" class="org-svg" />
 </p>
 </div>
@@ -579,8 +591,8 @@ I haven't shown how to customize packages, but there are multiple ways to do tha
 Operating system build on top of Nix and Nixpkgs.
 </p>
 </section>
-<section id="slide-org79b1504">
-<h3 id="org79b1504">What is NixOS?</h3>
+<section id="slide-org02c3108">
+<h3 id="org02c3108">What is NixOS?</h3>
 <ul>
 <li class="fragment appear">Build on Linux and SystemD</li>
 <li class="fragment appear">Entire system is configured in Nix language</li>
@@ -591,8 +603,8 @@ Operating system build on top of Nix and Nixpkgs.
 
 </ul>
 </section>
-<section id="slide-org6a56c7d">
-<h3 id="org6a56c7d">Example</h3>
+<section id="slide-org496477f">
+<h3 id="org496477f">Example</h3>
 <div class="org-src-container">
 
 <pre  class="src src-nix-ts"   ><code trim><span style="color: #b294bb;">{</span>
@@ -625,8 +637,8 @@ Operating system build on top of Nix and Nixpkgs.
 
 </aside>
 </section>
-<section id="slide-org4da3995">
-<h3 id="org4da3995">Atomic upgrades</h3>
+<section id="slide-org4783aad">
+<h3 id="org4783aad">Atomic upgrades</h3>
 <ul>
 <li>The whole system configuration is a package</li>
 <li>All configuration and all used packages are inputs</li>
@@ -646,10 +658,10 @@ Operating system build on top of Nix and Nixpkgs.
 
 </aside>
 </section>
-<section id="slide-org60c81a4">
-<h4 id="org60c81a4">Rollback</h4>
+<section id="slide-org7dea885">
+<h4 id="org7dea885">Rollback</h4>
 
-<div id="org422a2b3" class="figure">
+<div id="org68a3109" class="figure">
 <p><img src="./images/no-worry-nixos-rollback.jpg" alt="no-worry-nixos-rollback.jpg" />
 </p>
 </div>
@@ -665,8 +677,8 @@ Operating system build on top of Nix and Nixpkgs.
 
 </aside>
 </section>
-<section id="slide-org64c7a0f">
-<h3 id="org64c7a0f">Module system</h3>
+<section id="slide-orgc40c7b9">
+<h3 id="orgc40c7b9">Module system</h3>
 <div class="org-src-container">
 
 <pre  class="src src-nix-ts"   ><code trim><span style="color: #b294bb;">{</span>
@@ -701,13 +713,13 @@ Basically a module does two things:
 </section>
 </section>
 <section>
-<section id="slide-org2909b23">
-<h2 id="org2909b23">Pros and Cons</h2>
-<div class="outline-text-2" id="text-org2909b23">
+<section id="slide-orge57ec29">
+<h2 id="orge57ec29">Pros and Cons</h2>
+<div class="outline-text-2" id="text-orge57ec29">
 </div>
 </section>
-<section id="slide-org895b13b">
-<h3 id="org895b13b">Pros</h3>
+<section id="slide-org71921b7">
+<h3 id="org71921b7">Pros</h3>
 <ul>
 <li class="fragment appear">Full declarative, no configuration drift</li>
 <li class="fragment appear">Atomic upgrades and rollbacks</li>
@@ -721,8 +733,8 @@ Basically a module does two things:
 
 </ul>
 </section>
-<section id="slide-org790aa0e">
-<h3 id="org790aa0e">Cons</h3>
+<section id="slide-org266f886">
+<h3 id="org266f886">Cons</h3>
 <ul>
 <li class="fragment appear">Documentation is not great</li>
 <li class="fragment appear">Functional language</li>
@@ -751,13 +763,13 @@ to run binary through patchELF, or run it in a buildFHS environment.</li>
 </section>
 </section>
 <section>
-<section id="slide-orgde1e25d">
-<h2 id="orgde1e25d">My setup</h2>
-<div class="outline-text-2" id="text-orgde1e25d">
+<section id="slide-org49eaa08">
+<h2 id="org49eaa08">My setup</h2>
+<div class="outline-text-2" id="text-org49eaa08">
 </div>
 </section>
-<section id="slide-org2a78e7e">
-<h3 id="org2a78e7e">Systems running NixOS</h3>
+<section id="slide-org14818e2">
+<h3 id="org14818e2">Systems running NixOS</h3>
 <ul>
 <li>Personal laptop</li>
 <li>Work laptop</li>
@@ -768,27 +780,27 @@ to run binary through patchELF, or run it in a buildFHS environment.</li>
 
 </ul>
 </section>
-<section id="slide-org3d3350a">
-<h3 id="org3d3350a">Raspberry Pi Kiosk</h3>
+<section id="slide-orga1ded36">
+<h3 id="orga1ded36">Raspberry Pi Kiosk</h3>
 <p>
 <a href="https://c0deaddict.github.io/building-a-kiosk-using-go-2022/">https://c0deaddict.github.io/building-a-kiosk-using-go-2022/</a>
 </p>
 
 <div class="vertical-split"><div>
 
-<div id="org24fba38" class="figure">
+<div id="org45ab540" class="figure">
 <p><img src="./images/neon-display.jpg" alt="neon-display.jpg" />
 </p>
 </div>
 </div><div>
 
-<div id="org5519d34" class="figure">
+<div id="orgcb05997" class="figure">
 <p><img src="./images/neon-display-back.png" alt="neon-display-back.png" />
 </p>
 </div>
 </section>
-<section id="slide-org5f71d11">
-<h4 id="org5f71d11">Raspberry Pi Kiosk</h4>
+<section id="slide-org40722c0">
+<h4 id="org40722c0">Raspberry Pi Kiosk</h4>
 <ul>
 <li>custom Go program, with React frontend</li>
 <li>with a NixOS configuration for a Raspberry Pi</li>
@@ -816,8 +828,8 @@ to run binary through patchELF, or run it in a buildFHS environment.</li>
 </code></pre>
 </div>
 </section>
-<section id="slide-orgb8fda2a">
-<h3 id="orgb8fda2a">Self hosted services</h3>
+<section id="slide-org0823349">
+<h3 id="org0823349">Self hosted services</h3>
 <p>
 All configured through NixOS services.
 </p>
@@ -854,10 +866,41 @@ All configured through NixOS services.
 
 </aside>
 </section>
-<section id="slide-org980aa6e">
-<h3 id="org980aa6e">Impermanence</h3>
+<section id="slide-orge9cefab">
+<h4 id="orge9cefab">Example</h4>
+<div class="org-src-container">
 
-<div id="orgbe6e485" class="figure">
+<pre  class="src src-nix-ts"   ><code trim>services.<span style="color: #81a2be;">forgejo</span> = <span style="color: #b294bb;">rec</span> <span style="color: #b294bb;">{</span>
+  enable = <span style="color: #de935f;">true</span>;
+  useWizard = <span style="color: #de935f;">false</span>;
+  stateDir = home;
+  user = <span style="color: #b5bd68;">"git"</span>;
+  database = <span style="color: #81a2be;">{</span>
+    type = <span style="color: #b5bd68;">"postgres"</span>;
+    host = <span style="color: #b5bd68;">"/var/run/postgresql"</span>;
+    name = user; <span style="color: #969896;"># due to ensureDBOwnership this has to equal user.</span>
+    <span style="color: #b294bb;">inherit</span> user;
+  <span style="color: #81a2be;">}</span>;
+  dump = <span style="color: #81a2be;">{</span>
+    enable = <span style="color: #de935f;">true</span>;
+    interval = <span style="color: #b5bd68;">"02:05"</span>; <span style="color: #969896;"># Run a gitea dump every night.</span>
+  <span style="color: #81a2be;">}</span>;
+<span style="color: #b294bb;">}</span>;
+</code></pre>
+</div>
+
+<aside class="notes">
+<ul>
+<li>Show forgejo.nix config</li>
+
+</ul>
+
+</aside>
+</section>
+<section id="slide-org09c07bf">
+<h3 id="org09c07bf">Impermanence</h3>
+
+<div id="org3fe4159" class="figure">
 <p><img src="./images/nixos-impermanence.jpg" alt="nixos-impermanence.jpg" width="40%" />
 </p>
 </div>
@@ -876,18 +919,11 @@ All configured through NixOS services.
 </ul>
 
 </aside>
-
-<aside class="notes">
-<p>
-
-</p>
-
-</aside>
 </section>
-<section id="slide-org234f167">
-<h3 id="org234f167">Other cool things</h3>
+<section id="slide-org8d85282">
+<h3 id="org8d85282">Other cool things</h3>
 <ul>
-<li>Home manager</li>
+<li>Home Manager</li>
 <li>MicroVM's</li>
 <li>Agenix for secrets</li>
 <li>Lanzaboote for self signed SecureBoot</li>
@@ -909,21 +945,21 @@ All configured through NixOS services.
 </section>
 </section>
 <section>
-<section id="slide-org21282c8">
-<h2 id="org21282c8">Getting started</h2>
+<section id="slide-orgc52a557">
+<h2 id="orgc52a557">Getting started</h2>
 <ul>
-<li>Use Nix side-by-side in your current OS (Linux or MacOS)
+<li class="fragment appear">Use Nix side-by-side in your current OS (Linux or MacOS)
 Get familiar before diving in deep with NixOS</li>
-<li>Learn <b>Nix Flakes</b></li>
-<li>Learn to read Nixpkgs source</li>
-<li>Write derivations for your own/new packages</li>
-<li>Try out NixOS in a VM</li>
-<li>All in: install NixOS bare metal</li>
+<li class="fragment appear">Learn <b>Nix Flakes</b></li>
+<li class="fragment appear">Learn to read Nixpkgs source</li>
+<li class="fragment appear">Write derivations for your own/new packages</li>
+<li class="fragment appear">Try out NixOS in a VM</li>
+<li class="fragment appear">All in: install NixOS bare metal</li>
 
 </ul>
 </section>
-<section id="slide-orgdafbb86">
-<h3 id="orgdafbb86">Learning resources</h3>
+<section id="slide-org3fc6855">
+<h3 id="org3fc6855">Learning resources</h3>
 <ul>
 <li><a href="https://nix.dev/">https://nix.dev/</a></li>
 <li><a href="https://search.nixos.org/options">https://search.nixos.org/options</a></li>
@@ -934,8 +970,17 @@ Get familiar before diving in deep with NixOS</li>
 </section>
 </section>
 <section>
-<section id="slide-orgbb65236">
-<h2 id="orgbb65236">Questions?</h2>
+<section id="slide-orga2e9d20">
+<h2 id="orga2e9d20">Questions?</h2>
+
+<div id="org71f664f" class="figure">
+<p><img src="./images/qr-slides.svg" alt="qr-slides.svg" class="org-svg" width="40%" />
+</p>
+</div>
+
+<p>
+<a href="https://github.com/c0deaddict/nixos-cloud-native-groningen-2026/">https://github.com/c0deaddict/nixos-cloud-native-groningen-2026/</a>
+</p>
 </section>
 </section>
 </div>

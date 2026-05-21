@@ -136,7 +136,9 @@ A structure that defines an executable or script that takes some inputs and prod
 #+begin_notes
 - like a Makefile, a "build recipe"
 - inputs can be other derivations (dependencies)
-- to simplify: we can just call this a "package", actually there is a intermediate step called a "derivation file", but we'll ignore that for today.
+- to simplify: we can just call this a "package",
+  actually there is a intermediate step called a "derivation file",
+  *but we'll ignore that for today.*
 #+end_notes
 
 ** Example
@@ -153,11 +155,13 @@ A structure that defines an executable or script that takes some inputs and prod
   }
 #+end_src
 
+#+ATTR_REVEAL: :frag (appear)
 #+begin_src bash
   $ nix-build hello.nix
   /nix/store/74vhgn2qs91n9q4yws0qp4jbxq1aplpp-hello-world
 #+end_src
 
+#+ATTR_REVEAL: :frag (appear)
 #+begin_src bash
   $ cat result
   #!/nix/store/4bwbk...m2i-bash-interactive-5.3p9/bin/bash
@@ -204,7 +208,15 @@ The output name is a hash of the name, version, builder and *names of all inputs
 
 *Fixed output*
 
-Downloadable files for which we can know the hash before the build (eg. =fetchFromGitHub= or local =./src=)
+Downloadable files for which we can know the hash before the build (eg. =fetchurl= or local =./src=)
+
+#+ATTR_REVEAL: :frag (appear)
+#+begin_src nix-ts
+  fetchurl {
+    url = "https://raw.githubusercontent.com/NixOS/nixpkgs/23.05/.version";
+    hash = "sha256-ZHl1emidXVojm83LCVrwULpwIzKE/mYwfztVkvpruOM=";
+  }
+#+end_src
 
 #+begin_notes
 - This ensures that any change in the inputs will result in a new package output.
@@ -214,7 +226,7 @@ Downloadable files for which we can know the hash before the build (eg. =fetchFr
 
 ** Nix store
 
-- All packages are saved in the global =/nix/store=
+- All packages are installed in the global =/nix/store=
 - The store is immutable, packages are never overwritten.
 
 #+ATTR_REVEAL: :frag (appear)
@@ -268,6 +280,7 @@ buildGoModule rec {
 
 ** Nixpkgs
 
+#+ATTR_REVEAL: :frag (appear)
 - Git repository: https://github.com/NixOS/nixpkgs
 - Contains definitions of packages and modules
 - Also contains tests, library functions, etc.
@@ -371,6 +384,7 @@ pkgs.symlinkJoin {
 
 #+begin_notes
 - Show =nix-build ./profile.nix= and then =ls result/bin=
+- Could include this into =$PATH= (but don't do this manually, NixOS profiles are for that).
 #+end_notes
 
 ** What is Nix?
@@ -592,6 +606,31 @@ All configured through NixOS services.
   https://github.com/NixOS/nixpkgs/blob/a3c4cf99ba3f2b054c5f387446ee13b49a66be85/nixos/tests/vaultwarden.nix
 #+end_notes
 
+*** Example
+
+#+begin_src nix-ts
+  services.forgejo = rec {
+    enable = true;
+    useWizard = false;
+    stateDir = home;
+    user = "git";
+    database = {
+      type = "postgres";
+      host = "/var/run/postgresql";
+      name = user; # due to ensureDBOwnership this has to equal user.
+      inherit user;
+    };
+    dump = {
+      enable = true;
+      interval = "02:05"; # Run a gitea dump every night.
+    };
+  };
+#+end_src
+
+#+begin_notes
+- Show forgejo.nix config
+#+end_notes
+
 ** Impermanence
 
 #+ATTR_HTML: :width 40%
@@ -606,13 +645,9 @@ https://github.com/nix-community/impermanence
 - Selective files and dirs are bind mounted to keep state and secrets
 #+end_notes
 
-#+begin_notes
-
-#+end_notes
-
 ** Other cool things
 
-- Home manager
+- Home Manager
 - MicroVM's
 - Agenix for secrets
 - Lanzaboote for self signed SecureBoot
@@ -628,6 +663,7 @@ https://github.com/nix-community/impermanence
 
 * Getting started
 
+#+ATTR_REVEAL: :frag (appear)
 - Use Nix side-by-side in your current OS (Linux or MacOS)
   Get familiar before diving in deep with NixOS
 - Learn *Nix Flakes*
@@ -644,6 +680,11 @@ https://github.com/nix-community/impermanence
 - https://nixos.org/manual/nixos/stable/
 
 * Questions?
+
+#+ATTR_HTML: :width 40%
+[[./images/qr-slides.svg]]
+
+https://github.com/c0deaddict/nixos-cloud-native-groningen-2026/
 
 * Extra slides :noexport:
 
