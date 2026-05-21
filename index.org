@@ -1,6 +1,8 @@
 #+OPTIONS: num:nil date:nil toc:nil
-#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js@5.2.1
-#+REVEAL_INIT_OPTIONS: history:true
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_EXTRA_SCRIPT_BEFORE_SRC: https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js
+#+REVEAL_INIT_OPTIONS: history:true, plugins: [RevealNotes]
+#+REVEAL_PLUGINS: (marked markdown zoom notes)
 #+REVEAL_TRANS: slide
 #+REVEAL_THEME: black
 #+REVEAL_EXTRA_CSS: custom.css
@@ -62,12 +64,12 @@ Upgrading these systems was always a pain.
 ** Problems
 
 #+ATTR_REVEAL: :frag (appear)
-- Forget how systems are configured.
-- Hard to customize core system processes.
-- Hard to package custom software.
-- Configuration files are all over the place.
+- Forget how systems are configured
+- Hard to customize core system processes
+- Hard to package custom software
+- Configuration files are all over the place
 - Installing a new system is not complete ..
-- ..  and takes a long time.
+- ..  and takes a long time
 
 ** My solution: NixOS!
 
@@ -289,11 +291,14 @@ In general: this is the main source of truth. To make your system reproducible y
 #+begin_src bash
   git version
   # git version 2.53.0
-  nix-shell -p git --run "git --version" --pure -I nixpkgs=https://github.com/NixOS/nixpkgs/tarball/2a601aafdc5605a5133a2ca506a34a3a73377247
+  nix-shell -p git --run "git --version" --pure \
+    -I nixpkgs=https://github.com/NixOS/nixpkgs/tarball/2a601aafdc5605a5133a2ca506a34a3a73377247
   # git version 2.33.1
-  nix-shell -p git --run "git --version" --pure -I nixpkgs=https://github.com/NixOS/nixpkgs/tarball/18.03
+  nix-shell -p git --run "git --version" --pure \
+    -I nixpkgs=https://github.com/NixOS/nixpkgs/tarball/18.03
   # git version 2.16.2
-  nix-shell -p git --run "git --version" --pure -I nixpkgs=https://github.com/NixOS/nixpkgs/tarball/15.09
+  nix-shell -p git --run "git --version" --pure \
+    -I nixpkgs=https://github.com/NixOS/nixpkgs/tarball/15.09
   # git version 2.5.2
 #+end_src
 
@@ -530,10 +535,36 @@ Basically a module does two things:
 
 ** Raspberry Pi Kiosk
 
-#+ATTR_HTML: :width 80%
-[[./images/neon-display.jpg]]
-
 https://c0deaddict.github.io/building-a-kiosk-using-go-2022/
+
+#+reveal_html: <div class="vertical-split"><div>
+[[./images/neon-display.jpg]]
+#+reveal_html: </div><div>
+[[./images/neon-display-back.png]]
+
+*** Raspberry Pi Kiosk
+
+- custom Go program, with React frontend
+- with a NixOS configuration for a Raspberry Pi
+- cross compiled from =x86-64= to =aarch64=
+
+#+begin_src nix-ts
+  buildGoModule rec {
+    name = "neon-display";
+    version = "0.0.1";
+    src = ../..;
+    vendorSha256 = "sha256-WqdXu2yO...";
+    propagatedBuildInputs = [ rpi_ws281x ];
+    subPackages = [ "cmd/hal" "cmd/display" ];
+
+    NIX_CFLAGS_COMPILE = "-I${rpi_ws281x}/include/ws2811";
+    NIX_LDFLAGS_COMPILE = "-L${rpi_ws281x}/lib";
+
+    preBuild = ''
+      cp -r ${neon-display-frontend} frontend/dist
+    '';
+  }
+#+end_src
 
 ** Self hosted services
 
